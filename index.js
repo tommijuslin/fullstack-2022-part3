@@ -1,7 +1,9 @@
 const express = require('express')
 const morgan = require('morgan')
+const cors = require('cors')
 const app = express()
 
+app.use(cors())
 app.use(express.json())
 
 morgan.token('body', (request) => {
@@ -58,7 +60,6 @@ app.get('/info', (request, response) => {
 app.post('/api/persons', (request, response) => {
   const body = request.body
   
-
   if (!body.name || !body.number) {
     return response.status(400).json({
       error: 'name or number missing'
